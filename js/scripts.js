@@ -50,21 +50,29 @@ $( document ).ready(function() {
                 texto +=                '</div>'
                 texto +=            '</div>'
                 texto +=            '<div class="content article-body">'
+                texto +=                '<h3 class="has-text-centered">'+post.subtitulo+'</h3>'
                 texto +=                '<p>'+post.texto+'</p>'
+
                 texto +=            '</div>'
                 //mostrar comentarios
-                post.comentarios.forEach(function(comentario){
-                    texto += '<div class="box">'
-                    texto +=    '<div class="content">'
-                    texto +=        '<p>'
-                    var comentador = usuarios[comentario.usuario_id]
-                    texto +=            '<strong>'+comentador.nombre+'</strong> <small>'+fechaToString(new Date(comentario.creado_en))+'</small>'
-                    texto +=            '<br>'
-                    texto +=             comentario.comentario
-                    texto +=        '</p>'
-                    texto +=    '</div>'
-                    texto += '</div>'
-                })
+                texto += '<span class="tag is-rounded is-success">Comentarios:</span>'
+                if(post.comentarios.length > 0){
+                    post.comentarios.forEach(function(comentario){
+                        texto += '<div class="box">'
+                        texto +=    '<div class="content">'
+                        texto +=        '<p>'
+                        var comentador = usuarios[comentario.usuario_id]
+                        texto +=            '<strong>'+comentador.nombre+'</strong> <small>'+fechaToString(new Date(comentario.creado_en))+'</small>'
+                        texto +=            '<br>'
+                        texto +=             comentario.comentario
+                        texto +=        '</p>'
+                        texto +=    '</div>'
+                        texto += '</div>'
+                    })
+                }else{
+                    texto += '<div class="box">Sin comentarios</div>'
+                }
+                
                 // preguntamos si el usuario esta logueado para dejar un coentario 
                 if(localStorage.hasOwnProperty("usuario")){
                     texto += '<div class="field">'
