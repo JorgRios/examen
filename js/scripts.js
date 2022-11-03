@@ -60,7 +60,7 @@ $( document ).ready(function() {
                     var comentador = usuarios[comentario.usuario_id]
                     texto +=            '<strong>'+comentador.nombre+'</strong> <small>'+fechaToString(new Date(comentario.creado_en))+'</small>'
                     texto +=            '<br>'
-                    texto +=             comentario.cometario
+                    texto +=             comentario.comentario
                     texto +=        '</p>'
                     texto +=    '</div>'
                     texto += '</div>'
@@ -199,23 +199,17 @@ function comentar_en(elemento){
         $("#feed_post_"+elemento).html('<p class="help is-info">debe ingresar al menos 5 caracteres</p>')
     }
     var usuario_id = usuarios.findIndex( i => i.correo == usuario.correo )
-
     var comentarios = posts[elemento].comentarios
-
     comentar = {
         creado_en: new Date(),
         usuario_id: usuario_id,
-        cometario: comentario
+        comentario: comentario
     }
     comentarios.push(comentar)
-    //escribir en base
     posts[elemento].comentarios = comentarios
     localStorage.setItem('posts',JSON.stringify(posts))
     location.reload()
 }
-
-
-
 //helpers
 function fechaToString(fecha){
     let hora_n = fecha.getHours()
