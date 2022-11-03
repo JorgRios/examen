@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>JRios blog</title>
+        <link rel="stylesheet" href="vendor\bulma\css\bulma.min.css">
+        <script src="vendor\jquery\jquery361.min.js"></script>
+    </head>
+    <body>
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+              <a class="navbar-item" href="\">
+                <img src="img\logo.png" width="112" height="28">
+              </a>
+              <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+              </a>
+            </div>
+            <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-start">
+                </div>
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="buttons">
+                            <a class="button is-primary" id="registra-btn">
+                                <strong>Registrarse</strong>
+                            </a>
+                            <a class="button is-light" id="ingresa-btn">
+                                Ingresar
+                            </a>
+                            <a class="button is-light" id="btn_nombre">{{Usuario}}</a>
+                            <a class="button is-danger" id="btn_salir"> Salir</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+        <section class="hero is-info is-medium is-bold">
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                    <h1 class="title">Bienvenido a mi Blog personal</h1>
+                </div>
+            </div>
+        </section>
+        <div class="container">
+            <section class="articles">
+                <div class="column is-8 is-offset-2">
+                    <div class="card article">
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-content has-text-centered">
+                                    <p class="title article-title">Introducing a new feature for paid subscribers</p>
+                                    <div class="tags has-addons level-item">
+                                        <span class="tag is-rounded is-info">@skeetskeet</span>
+                                        <span class="tag is-rounded">May 10, 202X</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content article-body">
+                                <p>Non arcu risus quis varius quam quisque. Dictum varius duis at consectetur lorem. Posuere sollicitudin aliquam ultrices sagittis orci a scelerisque purus semper. </p>
+                                <p>Metus aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices. In hac habitasse platea dictumst vestibulum rhoncus est pellentesque elit. Accumsan lacus vel facilisis volutpat. Non sodales neque sodales ut etiam.
+                                    Est pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus.</p>
+                                <h3 class="has-text-centered">How to properly center tags in bulma?</h3>
+                                <p> Proper centering of tags in bulma is done with class: <pre>level-item</pre>
+                                    Voluptat ut farmacium tellus in metus vulputate. Feugiat in fermentum posuere urna nec. Pharetra convallis posuere morbi leo urna molestie.
+                                    Accumsan lacus vel facilisis volutpat est velit egestas. Fermentum leo vel orci porta. Faucibus interdum posuere lorem ipsum.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <section class="section">
+            <div class="container">
+                <h1 class="title">
+                    Hola Mundo
+                </h1>
+                <p class="subtitle" id="saludo">
+                    Texto de ejemplo en <strong> Bulma</strong>!
+                </p>
+            </div>
+        </section>
+        <div class="modal" id="modal-regis">
+            <div class="modal-background"></div> 
+            <div class="modal-content has-background-white py-5 px-5">
+                <h3 class="title mb-6"> Regístrate </h3>
+                <form>
+                    <div class="field">
+                        <label class="label">Nombre</label>
+                        <div class="control">
+                            <input type="text" class="input" placeholder="Nombre Completo" name="nombre">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Correo Electrónico</label>
+                        <div class="control">
+                            <input type="email" class="input" placeholder="Correo electrónico" name="correo">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Contraseña</label>
+                        <div class="control">
+                            <input type="password" class="input" placeholder="Contraseña" name="contrasenia">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Confirme su contraseña</label>
+                        <div class="control">
+                            <input type="password" class="input" placeholder="Confirme su contraseña" name="contrasenia2">
+                        </div>
+                    </div>
+                    <span id="feed_reg"></span>
+                    <div class="mt-6 has-text-centered">
+                        <button type="button" class="button is-success" id="registrar">Registrarse</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal" id="modal-ingre">
+            <div class="modal-background"></div> 
+            <div class="modal-content has-background-white py-5 px-5">
+                <h3 class="title mb-6"> Iniciar sesión </h3>
+                <form>
+                    <form>
+                        <div class="field">
+                            <label class="label">Correo Electrónico</label>
+                            <div class="control">
+                                <input type="email" class="input" placeholder="Correo electrónico" name="email">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Contraseña</label>
+                            <div class="control">
+                                <input type="password" class="input" placeholder="Contraseña" name="password">
+                            </div>
+                        </div>
+                        <span id="feed_log"></span>
+                        <div class="mt-6 has-text-centered">
+                            <button type="button" class="button is-info" id="ingresar">Ingresar</button>
+                        </div>
+                    </form>
+                </form>
+            </div>
+        </div>
+        <script src="js\scripts.js" defer></script>
+    </body>
+</html>
