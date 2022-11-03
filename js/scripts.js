@@ -5,11 +5,13 @@ const modal = $('.modal')
 const modalregis = $('#modal-regis')
 const modalingre = $('#modal-ingre')
 const modalnpost = $('#modal-npost')
+const modaleditu = $('#modal-editu')
 const btn_nombre = $('#btn_nombre')
 const btn_salir = $('#btn_salir')
 const btn_registrar = $('#registrar')
 const btn_ingresar = $('#ingresar')
 const btn_agregar = $('#agregar')
+const btn_actualizar = $('#actualizar')
 const btn_guardar_post = $('#crear')
 const mural = $('#mural')
 const boton_comentario = $('.button-comentario')
@@ -219,6 +221,38 @@ function comentar_en(elemento){
     localStorage.setItem('posts',JSON.stringify(posts))
     location.reload()
 }
+
+// actualizar datos usuario
+btn_nombre.click(function(){
+    console.log('actualizar datos de usuario')
+    modaleditu.addClass('is-active')
+    $('input[name=nombre_editar]').val(usuario.nombre)
+    $('input[name=correo_editar]').val(usuario.correo)
+});
+
+
+btn_actualizar.click(function(){
+    var usuario_id = usuarios.findIndex( i => i.correo == usuario.correo )
+    if($('input[name=contrasenia_editar]').val()!=''){
+        usuario_actualizado = {   
+            nombre : $('input[name=nombre_editar]').val(),
+            correo : $('input[name=correo_editar]').val(),          
+            contrasenia : $('input[name=contrasenia_editar]').val(),
+        }
+    }else{
+        usuario_actualizado = {      
+            nombre : $('input[name=nombre_editar]').val(),
+            correo : $('input[name=correo_editar]').val(),       
+            contrasenia : usuario.contrasenia,
+        }
+    }
+    usuarios[usuario_id]=usuario_actualizado//agregamos el usuario en base de datos
+    localStorage.setItem('usuarios',JSON.stringify(usuarios))
+    usuario = usuario_actualizado
+    localStorage.setItem('usuario',JSON.stringify(usuario))//iniciamos session de usuario
+    location.reload()
+})
+
 //helpers
 function fechaToString(fecha){
     let hora_n = fecha.getHours()

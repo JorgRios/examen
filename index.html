@@ -34,7 +34,7 @@
                             <a class="button is-light" id="ingresa-btn">
                                 Ingresar
                             </a>
-                            <a class="button is-light" id="btn_nombre">{{Usuario}}</a>
+                            <a class="button is-light" id="btn_nombre"></a>
                             <a class="button is-danger" id="btn_salir"> Salir</a>
                         </div>
                     </div>
@@ -93,6 +93,36 @@
                     <span id="feed_reg"></span>
                     <div class="mt-6 has-text-centered">
                         <button type="button" class="button is-success" id="registrar">Registrarse</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal" id="modal-editu">
+            <div class="modal-background"></div> 
+            <div class="modal-content has-background-white py-5 px-5">
+                <h3 class="title mb-6"> Actualizar mis datos </h3>
+                <form>
+                    <div class="field">
+                        <label class="label">Nombre</label>
+                        <div class="control">
+                            <input type="text" class="input" placeholder="Nombre Completo" name="nombre_editar">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Correo Electrónico</label>
+                        <div class="control">
+                            <input type="email" class="input" placeholder="Correo electrónico" name="correo_editar">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Contraseña</label>
+                        <div class="control">
+                            <input type="password" class="input" placeholder="Contraseña" name="contrasenia_editar">
+                        </div>
+                    </div>
+                    <span id="feed_reg"></span>
+                    <div class="mt-6 has-text-centered">
+                        <button type="button" class="button is-success" id="actualizar">Actualizar</button>
                     </div>
                 </form>
             </div>
