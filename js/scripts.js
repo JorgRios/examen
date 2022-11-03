@@ -25,6 +25,8 @@ $( document ).ready(function() {
     }
     if(localStorage.hasOwnProperty("usuarios")){
         usuarios = JSON.parse(localStorage.getItem("usuarios"));
+    }else{
+        usuarios = []
     }
 });
 //modal login
