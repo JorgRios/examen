@@ -12,7 +12,7 @@ const btn_ingresar = $('#ingresar')
 const btn_agregar = $('#agregar')
 const btn_guardar_post = $('#crear')
 const mural = $('#mural')
-
+const boton_comentario = $('.button-comentario')
 //montamos
 $( document ).ready(function() {
     if(localStorage.hasOwnProperty("usuario")){ //carga datos del usuario
@@ -36,7 +36,7 @@ $( document ).ready(function() {
         if(localStorage.hasOwnProperty('posts')){
             posts = JSON.parse(localStorage.getItem("posts"))
             texto = ''
-            posts.forEach(post => {
+            posts.forEach(function(post,index) {
                 texto += '<div class="card article">'
                 texto +=    '<div class="card-content">'
                 texto +=        '<div class="media">'
@@ -52,8 +52,31 @@ $( document ).ready(function() {
                 texto +=            '<div class="content article-body">'
                 texto +=                '<p>'+post.texto+'</p>'
                 texto +=            '</div>'
-                texto +=        '</div>'
-                texto +=    '</div>'
+                //mostrar comentarios
+                post.comentarios.forEach(function(comentario){
+                    texto += '<div class="box">'
+                    texto +=    '<div class="content">'
+                    texto +=        '<p>'
+                    var comentador = usuarios[comentario.usuario_id]
+                    texto +=            '<strong>'+comentador.nombre+'</strong> <small>'+fechaToString(new Date(comentario.creado_en))+'</small>'
+                    texto +=            '<br>'
+                    texto +=             comentario.cometario
+                    texto +=        '</p>'
+                    texto +=    '</div>'
+                    texto += '</div>'
+                })
+                // preguntamos si el usuario esta logueado para dejar un coentario 
+                if(localStorage.hasOwnProperty("usuario")){
+                    texto += '<div class="field">'
+                    texto +=    '<div class="control">'
+                    texto +=        '<input type="text" class="input" placeholder="Deja tu comentario" name="coment_post_'+index+'">'
+                    texto +=    '</div>'
+                    texto +=    '<span id="feed_post_'+index+'"></span>'
+                    texto +=  '</div>'
+                    texto += '<button class="button is-small is-info button-comentario" title="comentar" onclick="comentar_en('+index+')">Agregar comentario</button>'
+                }
+                texto +=      '</div>'
+                texto += '</div>'
     
             })      
             mural.html(texto)
@@ -144,6 +167,8 @@ btn_agregar.click(function(){
     modalnpost.addClass('is-active')
 })
 
+//inicio scripts blog
+
 btn_guardar_post.click(function(){
     var titulo = $('input[name=titulo]').val()
     var subtitulo = $('input[name=subtitulo]').val()
@@ -166,12 +191,29 @@ btn_guardar_post.click(function(){
     location.reload()
 })
 
-
-//inicio scripts blog
-
-
-
 //inicio escripts comentarios
+
+function comentar_en(elemento){
+    var comentario = $('input[name=coment_post_'+elemento+']').val()
+    if(comentario.length < 5 ){
+        $("#feed_post_"+elemento).html('<p class="help is-info">debe ingresar al menos 5 caracteres</p>')
+    }
+    var usuario_id = usuarios.findIndex( i => i.correo == usuario.correo )
+
+    var comentarios = posts[elemento].comentarios
+
+    comentar = {
+        creado_en: new Date(),
+        usuario_id: usuario_id,
+        cometario: comentario
+    }
+    comentarios.push(comentar)
+    //escribir en base
+    posts[elemento].comentarios = comentarios
+    localStorage.setItem('posts',JSON.stringify(posts))
+    location.reload()
+}
+
 
 
 //helpers
