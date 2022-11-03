@@ -36,7 +36,9 @@ $( document ).ready(function() {
         if(localStorage.hasOwnProperty('posts')){
             posts = JSON.parse(localStorage.getItem("posts"))
             texto = ''
-            posts.forEach(function(post,index) {
+            largo = posts.length-1
+            for (let index = largo; 0 <= index; index--) {
+                post = posts[index]
                 texto += '<div class="card article">'
                 texto +=    '<div class="card-content">'
                 texto +=        '<div class="media">'
@@ -85,8 +87,7 @@ $( document ).ready(function() {
                 }
                 texto +=      '</div>'
                 texto += '</div>'
-    
-            })      
+            }     
             mural.html(texto)
         }else{
             posts = []
